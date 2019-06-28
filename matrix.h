@@ -187,6 +187,7 @@ class Matrix4d
 {
 
 public:
+Matrix4d(){};
     double data[16];
     Matrix4d(double *data)
     {
@@ -331,5 +332,13 @@ inline std::ostream &operator<<(std::ostream &os, Matrix4d m)
 
     return os;
 }
+
+ Matrix4d Identity()
+ {
+    double data[16]={1,0,0,0, 0,1,0,0,    0,0,1,0,    0,0,0,1      };
+     return Matrix4d(data);
+ }
+
+
 
 #endif

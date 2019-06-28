@@ -9,6 +9,7 @@ public:
   color intensity;
 
   light(tuple position, color intensity) : position(position), intensity(intensity) {}
+  
 };
 
 #endif

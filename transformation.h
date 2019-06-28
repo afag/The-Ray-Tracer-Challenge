@@ -65,4 +65,26 @@ Matrix4d rotation_z(double radian)
     return Matrix4d(res);
 }
 
+
+Matrix4d view_transform(tuple from, tuple to, tuple up){
+     tuple temp=to-from;
+     tuple forward=normalize(temp);
+     tuple upn=normalize(up);
+     tuple left=cross(forward, upn);
+     tuple true_up=cross (left,forward);
+     double data[16]={left.x,left.y,left.z,0,   true_up.x,  true_up.y,  true_up.z,0,  -forward.x, -forward.y, -forward.z,0, 0,0,0,1};
+     return Matrix4d(data)*translation(-from.x,-from.y, -from.z); 
+}
+
+Matrix4d view_transform_v2(tuple from, tuple to, tuple up){
+     tuple temp=to-from;
+     tuple forward=normalize(temp);
+     tuple ss=forward*dot(forward,up);
+     tuple upn=up-ss;
+     tuple true_up=normalize(upn);
+     tuple left=cross(forward, true_up);
+     double data[16]={left.x,left.y,left.z,0,   true_up.x,  true_up.y,  true_up.z,0,  -forward.x, -forward.y, -forward.z,0, 0,0,0,1};
+     return Matrix4d(data); 
+}
+
 #endif
